@@ -19,4 +19,16 @@ function draw() {
 
 function mousePressed() {
   sceneMousePressed();
+  return false;
+}
+
+function mouseClicked() {
+  // some browsers fire clicked more reliably than pressed
+  sceneMousePressed();
+  return false;
+}
+
+function touchStarted() {
+  sceneMousePressed();
+  return false;
 }
