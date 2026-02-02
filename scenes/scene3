@@ -1,0 +1,79 @@
+const Scene3A = {
+  draw() {
+    drawHeader("SCENE 3A: INSIDE", "Fast access, messy cost.");
+    drawStatBar();
+
+    const panel = { x: 36, y: 130, w: 828, h: 310 };
+    drawPanel(panel.x, panel.y, panel.w, panel.h);
+
+    const lines = [
+      "You’re inside. The lights flicker like they’re deciding whether to stay on.",
+      "On the stairs, someone trips and drops a wallet. They don’t notice.",
+      "",
+      "You can return it… or keep it. Nobody saw.",
+    ];
+    drawBodyText(lines, panel.x + 24, panel.y + 22, panel.w - 48);
+
+    this.b1 = drawButton("Return the wallet", width / 2, 350, 520, 46, false);
+    this.b2 = drawButton("Keep it", width / 2, 410, 520, 46, false);
+  },
+
+  mousePressed() {
+    if (this.b1?.hovering) {
+      addKarma(+2, "Returned wallet");
+      game.flags.savedFriend = true; // treat as a “good” flag for endings
+      setState(STATES.END);
+    }
+    if (this.b2?.hovering) {
+      addKarma(-3, "Kept wallet");
+      setState(STATES.END);
+    }
+  },
+};
+
+const Scene3B = {
+  draw() {
+    drawHeader("SCENE 3B: SIDE DOOR", "Slower route. Cleaner hands.");
+    drawStatBar();
+
+    const panel = { x: 36, y: 130, w: 828, h: 310 };
+    drawPanel(panel.x, panel.y, panel.w, panel.h);
+
+    const lines = [
+      "You find a maintenance door. It’s locked with a keypad.",
+      "A tired worker exits and pauses: “You lost?”",
+      "",
+      "You can ask for help honestly, or sneak in behind them.",
+    ];
+    drawBodyText(lines, panel.x + 24, panel.y + 22, panel.w - 48);
+
+    this.b1 = drawButton(
+      "Ask honestly for help",
+      width / 2,
+      350,
+      520,
+      46,
+      false,
+    );
+    this.b2 = drawButton(
+      "Sneak in behind them",
+      width / 2,
+      410,
+      520,
+      46,
+      false,
+    );
+  },
+
+  mousePressed() {
+    if (this.b1?.hovering) {
+      addKarma(+2, "Asked honestly");
+      game.flags.savedFriend = true;
+      setState(STATES.END);
+    }
+    if (this.b2?.hovering) {
+      addKarma(-2, "Snuck in");
+      setState(STATES.END);
+    }
+  },
+};

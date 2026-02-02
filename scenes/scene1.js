@@ -1,48 +1,53 @@
-// NOTE: Do NOT add setup() or draw() in this file
-// setup() and draw() live in main.js
-// This file only defines:
-// 1) drawWin() → what the win screen looks like
-// 2) input handlers → how the player returns to the start screen
-//
-// This file is intentionally very similar to lose.js.
-// The goal is to show that win/lose screens are often
-// simple “end states” with minimal logic.
+const Scene1 = {
+  draw() {
+    drawHeader(
+      "SCENE 1: OUTSIDE THE GATE",
+      "First fork. Your first move sets the tone.",
+    );
+    drawStatBar();
 
-// ------------------------------------------------------------
-// Main draw function for win screen
-// ------------------------------------------------------------
-// drawWin() is called from main.js
-// only when currentScreen === "win"
-function drawWin() {
-  // Green-tinted background to communicate success
-  background(200, 255, 200);
+    const panel = { x: 36, y: 130, w: 828, h: 310 };
+    drawPanel(panel.x, panel.y, panel.w, panel.h);
 
-  fill(0);
-  textAlign(CENTER, CENTER);
+    const lines = [
+      "The guard doesn’t acknowledge you.",
+      "A stranger whispers: “My phone’s dead. I just need to call someone.”",
+      "",
+      "What do you do?",
+    ];
+    drawBodyText(lines, panel.x + 24, panel.y + 22, panel.w - 48);
 
-  // Main success message
-  textSize(40);
-  text("You Win!", width / 2, 300);
+    this.b1 = drawButton(
+      "Help the stranger (lend phone / call)",
+      width / 2,
+      320,
+      520,
+      46,
+      false,
+    );
+    this.b2 = drawButton(
+      "Ignore and approach the guard",
+      width / 2,
+      380,
+      520,
+      46,
+      false,
+    );
+    this.back = drawButton("TITLE", 820, 46, 120, 34, false);
+  },
 
-  // Instruction text
-  textSize(20);
-  text("Click or press R to return to Start.", width / 2, 360);
-}
-
-// ------------------------------------------------------------
-// Mouse input for win screen
-// ------------------------------------------------------------
-// Any mouse click returns the player to the start screen
-function winMousePressed() {
-  currentScreen = "start";
-}
-
-// ------------------------------------------------------------
-// Keyboard input for win screen
-// ------------------------------------------------------------
-// R is commonly used for “restart” in games
-function winKeyPressed() {
-  if (key === "r" || key === "R") {
-    currentScreen = "start";
-  }
-}
+  mousePressed() {
+    if (this.b1?.hovering) {
+      if (!game.flags.helpedStranger) {
+        game.flags.helpedStranger = true;
+        addKarma(+2, "Helped the stranger");
+      }
+      setState(STATES.S2A);
+    }
+    if (this.b2?.hovering) {
+      addKarma(-1, "Ignored someone in need");
+      setState(STATES.S2B);
+    }
+    if (this.back?.hovering) setState(STATES.TITLE);
+  },
+};

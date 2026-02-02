@@ -1,0 +1,14 @@
+project/
+index.html
+style.css
+main.js
+stateManager.js
+data.js
+utils.js
+ui.js
+scenes/
+title.js
+scene1.js
+scene2.js
+scene3.js
+endings.js
