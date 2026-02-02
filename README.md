@@ -12,7 +12,7 @@ Ria Anand
 
 ## Description
 
-The Silent Station is a short interactive narrative game built around choice, consequence, and ethical tension. The player navigates a closed transit station after curfew, making decisions that branch the story and incrementally alter a tracked karma stat. Each interaction—helping, lying, refusing, or exploiting—affects both immediate outcomes and the final ending. Endings are unlocked through a combination of accumulated karma and specific moral actions, emphasizing that how progress is achieved matters as much as reaching it.
+The Lost USB is a branching interactive story about ethics, restraint, and trust in an academic setting. The player finds a misplaced USB containing sensitive co-op application materials and must decide how to handle it. Each choice branches the narrative and alters a tracked trust stat, shaping both immediate consequences and long-term outcomes. Endings are unlocked based on accumulated trust and key moral decisions, emphasizing that integrity is defined not just by actions, but by how temptation is handled when no one is watching.
 
 ---
 
