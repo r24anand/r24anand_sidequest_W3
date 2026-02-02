@@ -1,7 +1,15 @@
+let cnv;
+
 function setup() {
-  createCanvas(900, 520);
+  cnv = createCanvas(900, 520);
   textFont("system-ui");
-  noSmooth();
+
+  // Bind input directly to canvas: cannot be overridden by other files
+  cnv.mousePressed(() => handleClick(mouseX, mouseY));
+  cnv.touchStarted(() => {
+    handleClick(mouseX, mouseY);
+    return false;
+  });
 }
 
 function draw() {
@@ -14,21 +22,5 @@ function draw() {
   for (let y = 0; y < height; y += 24) line(0, y, width, y);
   pop();
 
-  sceneDraw();
-}
-
-function mousePressed() {
-  sceneMousePressed();
-  return false;
-}
-
-function mouseClicked() {
-  // some browsers fire clicked more reliably than pressed
-  sceneMousePressed();
-  return false;
-}
-
-function touchStarted() {
-  sceneMousePressed();
-  return false;
+  drawNode();
 }
